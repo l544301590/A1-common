@@ -32,7 +32,7 @@ public interface UserRepository extends Serializable {
      * @throws Exception
      */
     public User_ searchUserById(int id) throws Exception;
-    public List<User_> searchUserByEmail(String email) throws Exception;
+    
     /**
      * DELETE
      *
@@ -56,8 +56,39 @@ public interface UserRepository extends Serializable {
      * @throws Exception
      */
     public List<User_> getAllUsers() throws Exception;
+    /**
+     * register
+     * @param user
+     * @return String  success:the level of the user
+     *                  fail:the reason
+     */
+    public String register(User_ user);
     
+   /**
+    * login
+    * @param user
+    * @return String success:the level of the user
+    *                 fail:"wrong password,try again"
+    */
+    public String login(User_ user);
     
+    public List<User_> SerachUserByAnyAttribute (User_ user);
+    
+    //these two method may be replace by the update
+    
+    /**
+     * modify the user's infomation except
+     * @param user
+     * @return 
+     */
+    //public void modifyUserInfoNotLevel(User_ user);
+    
+    /**
+     * modify the user's level and make sure the phone field,Last name,First name,Addressis not empty at the front desk
+     * @param user
+     * @return 
+     */
+    //public void modifyLevel(User_ user);
     
     
 }
