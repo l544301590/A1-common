@@ -4,8 +4,8 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fit5192.zz.repository.entities.Product</class>
     <class>fit5192.zz.repository.entities.Rating</class>
-    <class>fit5192.zz.repository.entities.User_</class>
     <class>fit5192.zz.repository.entities.Transaction_</class>
+    <class>fit5192.zz.repository.entities.User_</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/zzz"/>
       <property name="javax.persistence.jdbc.user" value="fit5192"/>
