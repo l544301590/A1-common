@@ -98,9 +98,9 @@ public class User_ implements Serializable {
         
     }
 
-    public User_(String email, String nickname, String password) {
+    public User_(String email, String password) {
         this.email = email;
-        this.nickname = nickname;
+        this.nickname = email;
         this.password = password;
         this.level = 1;
     }
