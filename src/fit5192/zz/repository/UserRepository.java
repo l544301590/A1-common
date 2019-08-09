@@ -32,7 +32,7 @@ public interface UserRepository extends Serializable {
      * @throws Exception
      */
     public User_ searchUserById(int id) throws Exception;
-
+    public List<User_> searchUserByEmail(String email) throws Exception;
     /**
      * DELETE
      *
