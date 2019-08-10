@@ -72,9 +72,12 @@ public interface UserRepository extends Serializable {
     */
     public String login(User_ user);
     
-    public List<User_> SerachUserByAnyAttribute (User_ user);
+    public List<User_> searchUserByAnyAttribute (User_ user);
     
     //these two method may be replace by the update
+    
+    
+    public List<User_> searchUserByEmail(String email);
     
     /**
      * modify the user's infomation except
