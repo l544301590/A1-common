@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TRANSACTION_")
-@NamedQuery(name = "Transaction.SearchTransactionsByUserId", query = "SELECT t FROM Transaction_ t WHERE t.user.id =: id")
+@NamedQuery(name = "Transaction.SearchTransactionsByUserId", query = "SELECT t FROM Transaction_ t WHERE t.user.id =: userId")
 @XmlRootElement
 public class Transaction_ implements Serializable {
 
