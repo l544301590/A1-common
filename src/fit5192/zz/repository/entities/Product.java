@@ -6,6 +6,7 @@
 package fit5192.zz.repository.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -75,6 +76,22 @@ public class Product implements Serializable {
     
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rating> ratings;
+
+    public Product() {
+        
+    }
+    
+    public Product(int id, String name, String imgPath, int category, String area, float price, int inventory, String description) {
+        this.id = id;
+        this.name = name;
+        this.imgPath = imgPath;
+        this.category = category;
+        this.area = area;
+        this.price = price;
+        this.inventory = inventory;
+        this.description = description;
+        this.ratings = new ArrayList<>();
+    }
 
     public List<Rating> getRatings() {
         return ratings;

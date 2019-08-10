@@ -56,6 +56,16 @@ public class Transaction_ implements Serializable {
     @NotNull
     private User_ user;
 
+    public Transaction_() {
+        
+    }
+
+    public Transaction_(Date date, List<Product> products, User_ user) {
+        this.date = date;
+        this.products = products;
+        this.user = user;
+    }
+    
     public int getId() {
         return id;
     }

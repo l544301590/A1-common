@@ -51,6 +51,10 @@ public class Rating implements Serializable {
     @JoinColumn(name = "USER_ID")
     private User_ user;
 
+    public Rating() {
+        
+    }
+    
     public User_ getUser() {
         return user;
     }
