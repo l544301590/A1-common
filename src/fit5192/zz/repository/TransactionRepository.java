@@ -58,4 +58,7 @@ public interface TransactionRepository extends Serializable {
      */
     public List<Transaction_> getAllTransactions() throws Exception;
     
+    public List<Transaction_> SearchTransactionsByUserId(int userId);
+    public List<Transaction_> SerachTransactionByAnyAttribute(Transaction_ transaction);
+    
 }
