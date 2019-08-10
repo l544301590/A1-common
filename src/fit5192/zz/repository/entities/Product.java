@@ -32,7 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "PRODUCT")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.searchProductByAnyAttribute", query = "SELECT p FROM Product p WHERE p.id=:id,"
+                                                + "ORDER BY select AVG(r.value) FROM Rating r WHERE  r.product=:product DESC")//我有强烈的感觉 这个语句会出错 r.value真的需要？
 })
 public class Product implements Serializable {
 
@@ -75,6 +77,21 @@ public class Product implements Serializable {
     
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rating> ratings;
+
+    public Product() {
+    }
+    public Product(int id, String name, String imgPath, int category, String area, float price, int inventory, String description, List<Rating> ratings) {
+        this.id = id;
+        this.name = name;
+        this.imgPath = imgPath;
+        this.category = category;
+        this.area = area;
+        this.price = price;
+        this.inventory = inventory;
+        this.description = description;
+        this.ratings = ratings;
+    }
+
 
     public List<Rating> getRatings() {
         return ratings;

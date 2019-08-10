@@ -7,7 +7,6 @@ package fit5192.zz.repository.entities;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "RATING")
+@NamedQuery(name = "Rating.searchRatingByProduct", query = "select r FROM Rating r WHERE  r.product=:product")
 @XmlRootElement
 public class Rating implements Serializable {
 
@@ -37,6 +40,8 @@ public class Rating implements Serializable {
     private int id;
     
     @Column(name = "VALUE")
+    @Max(5)
+    @Min(1)
     private int value;
     
     @Column(name = "COMMENT")

@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TRANSACTION_")
+@NamedQuery(name = "Transaction.SearchTransactionsByUserId", query = "SELECT t FROM Transaction_ t WHERE t.user.id =: id")
 @XmlRootElement
 public class Transaction_ implements Serializable {
 
@@ -55,6 +57,17 @@ public class Transaction_ implements Serializable {
     @JoinColumn(name = "USER_ID")
     @NotNull
     private User_ user;
+
+    public Transaction_() {
+    }
+
+    public Transaction_(int id, Date date, List<Product> products, User_ user) {
+        this.id = id;
+        this.date = date;
+        this.products = products;
+        this.user = user;
+    }
+    
 
     public int getId() {
         return id;
