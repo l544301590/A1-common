@@ -59,16 +59,15 @@ public class Transaction_ implements Serializable {
     private User_ user;
 
     public Transaction_() {
+        
     }
 
-    public Transaction_(int id, Date date, List<Product> products, User_ user) {
-        this.id = id;
+    public Transaction_(Date date, List<Product> products, User_ user) {
         this.date = date;
         this.products = products;
         this.user = user;
     }
     
-
     public int getId() {
         return id;
     }
