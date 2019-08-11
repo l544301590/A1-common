@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * bean validation：@author Zheng Ru
  */
 @Entity
-@Table(name = "USER_",uniqueConstraints = {@UniqueConstraint(columnNames={"EMAIL"})})
+@Table(name = "USER_")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User_.findAll", query = "SELECT u FROM User_ u"),
@@ -53,46 +53,46 @@ public class User_ implements Serializable {
     private int id;
     
     // TODO Bean Validation DISTINCT
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", length = 63)
     @NotNull
     @Pattern(regexp = emailFormat)
     private String email;
     
-    @Column(name = "NICKNAME")
+    @Column(name = "NICKNAME", length = 31)
     @NotNull
     private String nickname;
     
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", length = 31)
     @NotNull
     @Pattern(regexp = passwordFormat)
     private String password;
     
     //there are 4 levels
-    @Column(name = "LEVEL")
+    @Column(name = "LEVEL", precision = 1)
     @NotNull
     @Min(1)
     @Max(4)
     private int level;
     
-    @Column(name = "LASTNAME")
-    @Pattern(regexp =nameFormat )
+    @Column(name = "LASTNAME", length = 15)
+    @Pattern(regexp =nameFormat)
     private String lastName;
     
-    @Column(name = "FIRSTNAME")
+    @Column(name = "FIRSTNAME", length = 15)
     @Pattern(regexp =nameFormat )
     private String firstName;
     
-    @Column(name = "ADDRESS")
+    @Column(name = "ADDRESS", length = 63)
     private String address;
     
-    @Column(name = "PHONE")
+    @Column(name = "PHONE", length = 15)
     @Pattern(regexp =phoneFormat)
     private String phone;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Transaction_> transactions;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // mappedBy写的是Rating里的对象变量名
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)  // mappedBy写的是Rating里的对象变量名
     private List<Rating> ratings;
 
     public User_() {

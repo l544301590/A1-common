@@ -35,24 +35,24 @@ public class Rating implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
     @NotNull
     private int id;
     
-    @Column(name = "VALUE")
+    @Column(name = "VALUE", precision = 1)
     @Max(5)
     @Min(1)
     private int value;
     
-    @Column(name = "COMMENT")
+    @Column(name = "COMMENT", length = 511)
     private String comment;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "PRODUCT_ID")
     @NotNull
     private Product product;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "USER_ID")
     private User_ user;
 

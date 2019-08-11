@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TRANSACTION_")
-@NamedQuery(name = "Transaction.SearchTransactionsByUserId", query = "SELECT t FROM Transaction_ t WHERE t.user.id =: id")
+@NamedQuery(name = "Transaction.SearchTransactionsByUserId", query = "SELECT t FROM Transaction_ t WHERE t.user.id =:id")
 @XmlRootElement
 public class Transaction_ implements Serializable {
 
@@ -49,11 +49,11 @@ public class Transaction_ implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date date;
     
-    @OneToMany(/*mappedBy = "TRANSACTION_ID", */cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(/*mappedBy = "TRANSACTION_ID", */cascade = CascadeType.ALL)
     @NotNull
     private List<Product> products;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "USER_ID")
     @NotNull
     private User_ user;

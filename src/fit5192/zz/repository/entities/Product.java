@@ -34,38 +34,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.searchProductByAnyAttribute", query = "SELECT p FROM Product p WHERE p.id=:id,"
-                                                + "ORDER BY select AVG(r.value) FROM Rating r WHERE  r.product=:product DESC")//我有强烈的感觉 这个语句会出错 r.value真的需要？
+//    @NamedQuery(name = "Product.searchProductByAnyAttribute", query = "SELECT p FROM Product p WHERE p.id=:id,"
+//                                                + "ORDER BY select AVG(r.value) FROM Rating r WHERE  r.product=:product DESC")//我有强烈的感觉 这个语句会出错 r.value真的需要？
 })
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //reference to https://blog.csdn.net/zgljl2012/article/details/51052322
-    private static final String priceFormat = "(^[1-9]\\d*(\\.\\d{1,2})?$)|(^0(\\.\\d{1,2})?$)";
+//    private static final String priceFormat = "(^[1-9]\\d*(\\.\\d{1,2})?$)|(^0(\\.\\d{1,2})?$)";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //self increasing
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
     @NotNull
     private int id;
     
-    @Column(name = "NAME")
+    @Column(name = "NAME", length = 80)
     @NotNull
     private String name;  // full name, including category name
     
     @Column(name = "IMG_PATH")
     private String imgPath;
     
-    @Column(name = "CATEGORY")
+    @Column(name = "CATEGORY", precision = 2)
     private int category;
     
-    @Column(name = "AREA")
+    @Column(name = "AREA", length = 40)
     private String area;
     
-    @Column(name = "PRICE")
+    @Column(name = "PRICE", precision = 10, scale = 2)
     @NotNull
-    //Can the reg validate the float? yes
-    @Pattern(regexp = priceFormat)
     private float price;  // unit price
     
     //if the inventory is 0, mean the goods are sold out today
@@ -73,14 +71,23 @@ public class Product implements Serializable {
     @Min(0)
     private int inventory;
     
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", length = 511)
     private String description;
     
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
     public Product() {
     }
+
+    public Product(String name, int category, String area, float price, int inventory) {
+        this.name = name;
+        this.category = category;
+        this.area = area;
+        this.price = price;
+        this.inventory = inventory;
+    }
+    
     public Product(int id, String name, String imgPath, int category, String area, float price, int inventory, String description, List<Rating> ratings) {
         this.id = id;
         this.name = name;
