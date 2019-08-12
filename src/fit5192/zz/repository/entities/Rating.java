@@ -47,18 +47,33 @@ public class Rating implements Serializable {
     @Column(name = "COMMENT", length = 511)
     private String comment;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "PRODUCT_ID")
-    @NotNull
+    @ManyToOne(cascade =  CascadeType.ALL)
+    @JoinColumn(name = "PRODUCT_ID",nullable = false)
     private Product product;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "USER_ID")
+    @ManyToOne(cascade =  CascadeType.ALL)
+    @JoinColumn(name = "USER_ID",nullable = false)
     private User_ user;
 
     public Rating() {
         
     }
+
+    public Rating(int value, Product product, User_ user) {
+        this.value = value;
+        this.product = product;
+        this.user = user;
+    }
+    
+
+    public Rating(int id, int value, String comment, Product product, User_ user) {
+        this.id = id;
+        this.value = value;
+        this.comment = comment;
+        this.product = product;
+        this.user = user;
+    }
+    
     
     public User_ getUser() {
         return user;

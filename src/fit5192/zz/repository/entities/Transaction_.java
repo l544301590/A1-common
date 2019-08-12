@@ -16,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,18 +46,17 @@ public class Transaction_ implements Serializable {
     private int id;
     
     @Column(name = "DATE")
-    @NotNull
-    @Past
     @Temporal(TemporalType.DATE)
     private Date date;
     
-    @OneToMany(/*mappedBy = "TRANSACTION_ID", */cascade = CascadeType.ALL)
-    @NotNull
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name="transaction__product",
+              joinColumns=@JoinColumn(name="transaction__id"),
+              inverseJoinColumns =@JoinColumn(name="products_id") )
     private List<Product> products;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "USER_ID")
-    @NotNull
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})//这里改了
+    @JoinColumn(name = "USER_ID",nullable = false)
     private User_ user;
 
     public Transaction_() {
@@ -67,6 +68,17 @@ public class Transaction_ implements Serializable {
         this.products = products;
         this.user = user;
     }
+
+  
+
+    public Transaction_(int id, Date date, List<Product> products, User_ user) {
+        this.id = id;
+        this.date = date;
+        this.products = products;
+        this.user = user;
+    }
+
+  
     
     public int getId() {
         return id;

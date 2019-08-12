@@ -8,6 +8,7 @@ package fit5192.zz.repository.entities;
 import fit5192.zz.utils.EmailValidation;
 import fit5192.zz.utils.PasswordValidation;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -47,8 +48,7 @@ public class User_ implements Serializable {
     private static final String passwordFormat="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\\W]).{8,20}$"; 
     private static final String nameFormat="^[a-zA-Z]+$";// only have letter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//不确定
     @Column(name = "ID")
     private int id;
     
@@ -92,7 +92,10 @@ public class User_ implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Transaction_> transactions;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)  // mappedBy写的是Rating里的对象变量名
+    
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)  // mappedBy写的是Rating里的对象变量名
+//    private List<Rating> ratings;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
     public User_() {

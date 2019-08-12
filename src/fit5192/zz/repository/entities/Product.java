@@ -8,6 +8,7 @@ package fit5192.zz.repository.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -50,7 +52,6 @@ public class Product implements Serializable {
     private int id;
     
     @Column(name = "NAME", length = 80)
-    @NotNull
     private String name;  // full name, including category name
     
     @Column(name = "IMG_PATH")
@@ -63,7 +64,6 @@ public class Product implements Serializable {
     private String area;
     
     @Column(name = "PRICE", precision = 10, scale = 2)
-    @NotNull
     private float price;  // unit price
     
     //if the inventory is 0, mean the goods are sold out today
@@ -74,8 +74,12 @@ public class Product implements Serializable {
     @Column(name = "DESCRIPTION", length = 511)
     private String description;
     
+    @ManyToMany(mappedBy = "products" , cascade = CascadeType.ALL)
+    private Set<Transaction_> transactions;
+        
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Rating> ratings;
+    
 
     public Product() {
     }
@@ -88,7 +92,7 @@ public class Product implements Serializable {
         this.inventory = inventory;
     }
     
-    public Product(int id, String name, String imgPath, int category, String area, float price, int inventory, String description, List<Rating> ratings) {
+    public Product(int id, String name, String imgPath, int category, String area, float price, int inventory, String description, List<Rating> ratings,Set<Transaction_> transactions) {
         this.id = id;
         this.name = name;
         this.imgPath = imgPath;
@@ -98,7 +102,17 @@ public class Product implements Serializable {
         this.inventory = inventory;
         this.description = description;
         this.ratings = ratings;
+        this.transactions=transactions;
     }
+    public Set<Transaction_> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Set<Transaction_> transactions) {
+        this.transactions = transactions;
+    }
+
+
 
 
     public List<Rating> getRatings() {
