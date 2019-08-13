@@ -89,13 +89,13 @@ public class User_ implements Serializable {
     @Pattern(regexp =phoneFormat)
     private String phone;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Transaction_> transactions;
     
     
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)  // mappedBy写的是Rating里的对象变量名
 //    private List<Rating> ratings;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Rating> ratings;
 
     public User_() {

@@ -47,11 +47,11 @@ public class Rating implements Serializable {
     @Column(name = "COMMENT", length = 511)
     private String comment;
     
-    @ManyToOne(cascade =  CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "PRODUCT_ID",nullable = false)
     private Product product;
     
-    @ManyToOne(cascade =  CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "USER_ID",nullable = false)
     private User_ user;
 

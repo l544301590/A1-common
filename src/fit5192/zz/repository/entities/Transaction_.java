@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -34,8 +35,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TRANSACTION_")
-@NamedQuery(name = "Transaction.SearchTransactionsByUserId", query = "SELECT t FROM Transaction_ t WHERE t.user.id =:id")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Transaction_.findAll", query = "SELECT t FROM Transaction_ t"),
+    @NamedQuery(name = "Transaction_.SearchTransactionsByUserId", query = "SELECT t FROM Transaction_ t WHERE t.user.id = :userId")
+})
 public class Transaction_ implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,23 +48,25 @@ public class Transaction_ implements Serializable {
     @Column(name = "ID")
     @NotNull
     private int id;
-    
+
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
     private Date date;
-    
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name="transaction__product",
-              joinColumns=@JoinColumn(name="transaction__id"),
-              inverseJoinColumns =@JoinColumn(name="products_id") )
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "transaction__product",
+            joinColumns = @JoinColumn(name = "transaction__id"),
+            inverseJoinColumns = @JoinColumn(name = "products_id")
+    )
     private List<Product> products;
-    
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})//这里改了
-    @JoinColumn(name = "USER_ID",nullable = false)
+
+    @ManyToOne(fetch = FetchType.EAGER)//这里改了
+    @JoinColumn(name = "USER_ID", nullable = false)
     private User_ user;
 
     public Transaction_() {
-        
+
     }
 
     public Transaction_(Date date, List<Product> products, User_ user) {
@@ -69,8 +75,6 @@ public class Transaction_ implements Serializable {
         this.user = user;
     }
 
-  
-
     public Transaction_(int id, Date date, List<Product> products, User_ user) {
         this.id = id;
         this.date = date;
@@ -78,8 +82,6 @@ public class Transaction_ implements Serializable {
         this.user = user;
     }
 
-  
-    
     public int getId() {
         return id;
     }
@@ -136,5 +138,5 @@ public class Transaction_ implements Serializable {
     public String toString() {
         return "fit5192.zz.repository.entities.Transaction[ id=" + id + " ]";
     }
-    
+
 }
