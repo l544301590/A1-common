@@ -74,10 +74,10 @@ public class Product implements Serializable {
     @Column(name = "DESCRIPTION", length = 511)
     private String description;
     
-    @ManyToMany(mappedBy = "products" , cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "products")
     private Set<Transaction_> transactions;
         
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product")
     private List<Rating> ratings;
     
 
@@ -207,9 +207,14 @@ public class Product implements Serializable {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "fit5192.zz.repository.entities.Fruit[ id=" + id + " ]";
+//    }
+
     @Override
     public String toString() {
-        return "fit5192.zz.repository.entities.Fruit[ id=" + id + " ]";
+        return "Product{" + "id=" + id + ", name=" + name + ", imgPath=" + imgPath + ", category=" + category + ", area=" + area + ", price=" + price + ", inventory=" + inventory + ", description=" + description + ", transactions=" + transactions + ", ratings=" + ratings + '}';
     }
     
 }
