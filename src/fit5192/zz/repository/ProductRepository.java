@@ -57,6 +57,11 @@ public interface ProductRepository extends Serializable {
      * @throws Exception
      */
     public List<Product> getAllProducts() throws Exception;
-    
+    /**
+     * search product by any attribute
+     * @param product
+     * @return List<Product>
+     */
     public List<Product> searchProductByAnyAttribute(Product product);
+    //public List<Product> searchTest();
 }
