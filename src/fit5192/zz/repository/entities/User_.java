@@ -109,6 +109,14 @@ public class User_ implements Serializable {
         this.level = 1;
     }
 
+    public User_(String nickname, String lastName, String firstName, String address, String phone) {
+        this.nickname = nickname;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+        this.phone = phone;
+    }
+
     public User_(int id, String email, String nickname, String password, int level, String lastName, String firstName, String address, String phone, List<Transaction_> transactions, List<Rating> ratings) {
         this.id = id;
         this.email = email;

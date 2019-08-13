@@ -47,7 +47,7 @@ public interface UserRepository extends Serializable {
      * @param User
      * @throws Exception
      */
-    public void updateUser(User_ product) throws Exception;
+    public void updateUser(User_ user) throws Exception;
 
     /**
      * GET ALL
