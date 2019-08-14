@@ -74,10 +74,10 @@ public class Product implements Serializable {
     @Column(name = "DESCRIPTION", length = 511)
     private String description;
     
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
     private Set<Transaction_> transactions;
         
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Rating> ratings;
     
 

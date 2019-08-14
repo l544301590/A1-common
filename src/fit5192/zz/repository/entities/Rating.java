@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -27,36 +28,40 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "RATING")
-@NamedQuery(name = "Rating.searchRatingByProduct", query = "select r FROM Rating r WHERE  r.product=:product")
+@NamedQueries({
+    @NamedQuery(name = "Rating.searchRatingByProduct", query = "SELECT r FROM Rating r WHERE r.product=:product"),
+    @NamedQuery(name = "Rating.searchRatingByProductId", query = "SELECT r FROM Rating r WHERE r.product.id=:productId")
+})
+
 @XmlRootElement
 public class Rating implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     @NotNull
     private int id;
-    
+
     @Column(name = "VALUE", precision = 1)
     @Max(5)
     @Min(1)
     private int value;
-    
+
     @Column(name = "COMMENT", length = 511)
     private String comment;
-    
+
     @ManyToOne()
-    @JoinColumn(name = "PRODUCT_ID",nullable = false)
+    @JoinColumn(name = "PRODUCT_ID", nullable = false)
     private Product product;
-    
+
     @ManyToOne()
-    @JoinColumn(name = "USER_ID",nullable = false)
+    @JoinColumn(name = "USER_ID", nullable = false)
     private User_ user;
 
     public Rating() {
-        
+
     }
 
     public Rating(int value, Product product, User_ user) {
@@ -64,17 +69,14 @@ public class Rating implements Serializable {
         this.product = product;
         this.user = user;
     }
-    
 
-    public Rating(int id, int value, String comment, Product product, User_ user) {
-        this.id = id;
+    public Rating(int value, String comment, Product product, User_ user) {
         this.value = value;
         this.comment = comment;
         this.product = product;
         this.user = user;
     }
-    
-    
+
     public User_ getUser() {
         return user;
     }
@@ -82,7 +84,7 @@ public class Rating implements Serializable {
     public void setUser(User_ user) {
         this.user = user;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -139,5 +141,5 @@ public class Rating implements Serializable {
     public String toString() {
         return "fit5192.zz.repository.entities.Rating[ id=" + id + " ]";
     }
-    
+
 }

@@ -6,6 +6,7 @@
 package fit5192.zz.repository;
 
 import fit5192.zz.repository.entities.Product;
+import fit5192.zz.repository.entities.User_;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Remote;
@@ -64,4 +65,6 @@ public interface ProductRepository extends Serializable {
      */
     public List<Product> searchProductByAnyAttribute(Product product);
     //public List<Product> searchTest();
+    
+    public List<Product> getAllProductsSorted(User_ user);
 }

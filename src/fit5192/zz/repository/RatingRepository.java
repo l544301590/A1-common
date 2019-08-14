@@ -56,5 +56,5 @@ public interface RatingRepository extends Serializable {
      * @throws Exception
      */
     public List<Rating> getAllRating() throws Exception;
-    
+    public List<Rating> searchRatingsByProductId(int productId);
 }
