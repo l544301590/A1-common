@@ -44,7 +44,7 @@ public class User_ implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final String emailFormat="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$"; 
-    private static final String phoneFormat="(^[9][0-9]{8}$|^[0][0-9]{9}$)"; //the first digit of the phone number must be a 9 and the number must be 8 digits long
+    private static final String phoneFormat="(^[9][0-9]{7}$|^[0][0-9]{9}$)"; //the first digit of the phone number must be a 9 and the number must be 8 digits long
     private static final String passwordFormat="^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\\W]).{8,20}$"; 
     private static final String nameFormat="^[a-zA-Z]+$";// only have letter
     @Id
@@ -109,13 +109,30 @@ public class User_ implements Serializable {
         this.level = 1;
     }
 
-    public User_(String nickname, String lastName, String firstName, String address, String phone) {
+
+    public User_(String email, String nickname, String password, int level, String lastName, String firstName, String address, String phone) {
+        this.email = email;
         this.nickname = nickname;
+        this.password = password;
+        this.level = level;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
         this.phone = phone;
     }
+
+    public User_(int id, String email, String nickname, String password, int level, String lastName, String firstName, String address, String phone) {
+        this.id = id;
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+        this.level = level;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+        this.phone = phone;
+    }
+
 
     public User_(int id, String email, String nickname, String password, int level, String lastName, String firstName, String address, String phone, List<Transaction_> transactions, List<Rating> ratings) {
         this.id = id;
