@@ -89,7 +89,7 @@ public class User_ implements Serializable {
     @Pattern(regexp =phoneFormat)
     private String phone;
     
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     private List<Transaction_> transactions;
     
     
